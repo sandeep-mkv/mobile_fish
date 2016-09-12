@@ -7,4 +7,4 @@ require 'minitest/stub_any_instance'
 
 Minitest::Reporters.use!
 
-DEFAULT_DICTIONARY_FILE = "#{Dir.pwd}/test/data/default_dictionary.txt"
+DEFAULT_DICTIONARY_FILE = "#{Dir.pwd}/test/data/test_default_dictionary.txt"

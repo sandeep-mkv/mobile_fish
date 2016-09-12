@@ -7,7 +7,7 @@ PHONE_NUMBERS_FILE = "#{Dir.pwd}/test/data/phone_numbers.txt"
 
 class ApplicationServiceTest < Minitest::Test
 
-  def test_that_it_has_an_option_to_configure_it_to_use_dictionary_provided_by_user
+  def test_that_it_has_an_option_to_configure_dictionary_provided_by_user
     app_service = MobileFish::ApplicationService.new({d:"/path/to/dictionary.txt"})
     assert_equal "/path/to/dictionary.txt", app_service.config_options[:d]
   end

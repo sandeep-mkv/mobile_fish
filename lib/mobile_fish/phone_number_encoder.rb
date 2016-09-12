@@ -24,7 +24,7 @@ module MobileFish
       @phone_dictionary = Hash.new {|hash, key| hash[key] = Array.new}
       ("0".."9").each {|num| @phone_dictionary[num] << num}
       File.readlines(@dictionary_file).each do |line|
-        word = line.chomp.gsub(/[^a-zA-Z]/i, '')
+        word = line.chomp.gsub(/[^a-zA-Z]/i, '').downcase
         digit_encoding = encode_word_as_digits(word)
         unless @phone_dictionary[digit_encoding].include?(word)
           @phone_dictionary[digit_encoding] << word

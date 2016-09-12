@@ -4,9 +4,9 @@ require "optparse"
 
 config_options = {d: "", f: []}
 parser = OptionParser.new do|opts|
-  opts.banner = "Usage: years.rb [options]"
+  opts.banner = "Usage: mobile_fish [options]"
   # List of arguments.
-  opts.on('-d', '--dictionary', 'Uses this dictionary instead of default') do |dictionary|
+  opts.on('-d', '--dictionary', 'Use this dictionary instead of default') do |dictionary|
     config_options[:d] = dictionary;
   end
 
@@ -17,7 +17,6 @@ parser = OptionParser.new do|opts|
 end
 
 parser.parse!
-
 config_options[:f] = ARGV.to_a
 
 require "mobile_fish"

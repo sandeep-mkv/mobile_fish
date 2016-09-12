@@ -44,15 +44,30 @@ class PhoneNumberEncoderTest < Minitest::Test
     assert_empty words
   end
 
-  def test_that_it_gives_all_possible_word_matches_for_a_given_number_case
-    ("0".."9").each do |num|
-      words = @phone_number_matcher.encode "#{num}225592255"
+  def test_that_it_matches_dictionary_word_case_insensitively
+    words = @phone_number_matcher.encode "86438"
+    assert_instance_of Array, words
+    assert_equal 1, words.size
+    assert words.include? "TO-GET"
+  end
+
+  def test_that_it_gives_all_possible_word_matches_for_a_given_number
+      words = @phone_number_matcher.encode "02281228"
       assert_instance_of Array, words
       assert_equal 4, words.size
-      assert words.include? "#{num}-BALL-9-BALL"
-      assert words.include? "#{num}-BALL-9-CALL"
-      assert words.include? "#{num}-CALL-9-CALL"
-      assert words.include? "#{num}-CALL-9-BALL"
-    end
+      assert words.include? "0-BAT-1-BAT"
+      assert words.include? "0-BAT-1-CAT"
+      assert words.include? "0-CAT-1-CAT"
+      assert words.include? "0-CAT-1-BAT"
+  end
+
+  def test_that_it_gives_all_possible_word_matches_for_a_given_number_single_letter_word
+      words = @phone_number_matcher.encode "446"
+      assert_instance_of Array, words
+      assert_equal 4, words.size
+      assert words.include? "4-I-6"
+      assert words.include? "I-I-6"
+      assert words.include? "4-GO"
+      assert words.include? "I-GO"
   end
 end
