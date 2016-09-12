@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require "optparse"
+
+config_options = {d: "", f: []}
+parser = OptionParser.new do|opts|
+  opts.banner = "Usage: years.rb [options]"
+  # List of arguments.
+  opts.on('-d', '--dictionary', 'Uses this dictionary instead of default') do |dictionary|
+    config_options[:d] = dictionary;
+  end
+
+  opts.on('-h', '--help', 'Displays Help') do
+    puts opts
+    exit
+  end
+end
+
+parser.parse!
+
+config_options[:f] = ARGV.to_a
+
+require "mobile_fish"
+MobileFish::ApplicationService.new(config_options).start

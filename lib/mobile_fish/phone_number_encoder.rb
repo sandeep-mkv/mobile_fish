@@ -1,23 +1,21 @@
 module MobileFish
-  class PhoneNumberMatcher
+  class PhoneNumberEncoder
 
     DIGIT_ENCODINGS = {a: "2", b: "2", c: "2", d: "3", e: "3", f: "3", g: "4",
       h: "4", i: "4", j: "5", k: "5", l: "5", m: "6", n: "6", o: "6", p: "7",
       q: "7", r: "7", s: "7", t: "8", u: "8", v: "8", w: "9", x: "9", y: "9",
       z: "9"}
 
-    def initialize(dictionary_file, phone_numbers_file="")
+    def initialize(dictionary_file)
       @dictionary_file = dictionary_file
       configure_dictionary
     end
 
-    def word_matches(phone_number)
+    def encode(phone_number)
       phone_number = phone_number.gsub(/[^0-9]/i, '')
-      matched_list = []
-      matched_list = find_word_matches(phone_number, matched_list)
+      matched_list = find_word_matches(phone_number, matched_list=[])
       results = process_matched_results(matched_list)
       results.reject! { |words| words =~ /\d-\d/ }
-      results
     end
 
     private
@@ -28,12 +26,14 @@ module MobileFish
       File.readlines(@dictionary_file).each do |line|
         word = line.chomp.gsub(/[^a-zA-Z]/i, '')
         digit_encoding = encode_word_as_digits(word)
-        @phone_dictionary[digit_encoding] << word
+        unless @phone_dictionary[digit_encoding].include?(word)
+          @phone_dictionary[digit_encoding] << word
+        end
       end
     end
 
     def encode_word_as_digits(word)
-      digit_encodings = PhoneNumberMatcher::DIGIT_ENCODINGS
+      digit_encodings = MobileFish::PhoneNumberEncoder::DIGIT_ENCODINGS
       result = ""
       word.chars.each {|c| result << digit_encodings[c.downcase.to_sym] }
       result
@@ -41,14 +41,14 @@ module MobileFish
 
     def find_word_matches(phone_number, results, matched_word_list=[])
       @phone_dictionary.each_with_index do |(digits, word_list), index|
-        reminder = match_and_get_reminder(phone_number, digits)
-        if reminder
+        remainder = match_and_get_remainder(phone_number, digits)
+        if remainder
           matched_word_list_copy = matched_word_list.dup << word_list
-          if reminder.empty?
+          if remainder.empty?
             results << matched_word_list_copy
             results
           else
-            find_word_matches(reminder, results, matched_word_list_copy)
+            find_word_matches(remainder, results, matched_word_list_copy)
           end
         end
       end
@@ -64,11 +64,11 @@ module MobileFish
     end
 
     def evaluate_word_combinations(matched_word_list)
-      # INPUT = [ [call],[me] ]
-      # OUTPUT = ["CALL-ME"]
+      # INPUT = [ ["0"]["how"],["are"], ["you"]]
+      # OUTPUT = [["0-HOW-ARE-YOU"]]
       first_word_list, *others = matched_word_list
       if others.empty?
-        res = first_word_list.map {|word| word.upcase}
+        first_word_list.map {|word| word.upcase}
       else
         first_word_list.map do |word|
           res = evaluate_word_combinations(others)
@@ -79,7 +79,7 @@ module MobileFish
       end
     end
 
-    def match_and_get_reminder(phone_number, digits)
+    def match_and_get_remainder(phone_number, digits)
       if phone_number[0..digits.size-1] == digits
         phone_number[digits.size..-1]
       end

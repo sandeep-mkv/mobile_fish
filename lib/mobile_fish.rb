@@ -1,6 +1,6 @@
 require "mobile_fish/version"
-require "byebug"
 
 module MobileFish
-
+  DEFAULT_DICTIONARY = "#{Dir.pwd}/data/default_dictionary.txt"
+  require "mobile_fish/application_service"
 end
