@@ -1,3 +1,4 @@
+require "singleton"
 module MobileFish
   class PhoneDictionary
     include Singleton

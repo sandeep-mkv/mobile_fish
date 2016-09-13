@@ -31,7 +31,7 @@ module MobileFish
       end
 
       def encode_word_as_digits(word)
-        digit_encodings = MobileFish::PhoneNumberEncoder::DIGIT_ENCODINGS
+        digit_encodings = MobileFish::Encoders::DIGIT_ENCODINGS
         result = ""
         word.chars.each {|c| result << digit_encodings[c.downcase.to_sym] }
         result

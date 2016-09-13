@@ -20,4 +20,4 @@ parser.parse!
 config_options[:f] = ARGV.to_a
 
 require "mobile_fish"
-MobileFish::ApplicationService.new(config_options).start
+MobileFish::Application.new(config_options).start
