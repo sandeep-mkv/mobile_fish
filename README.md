@@ -1,41 +1,38 @@
 # MobileFish
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/mobile_fish`. To experiment with that code, run `bin/console` for an interactive prompt.
+This gem is a solution to the 1800-CODING-CHALLENGE.
 
-TODO: Delete this and the text above, and describe your gem
+1-800-CODING-CHALLENGE:
+ Many companies like to list their phone numbers using the letters printed on most telephones. This makes the number easier to remember for customers. An example may be 1-800-FLOWERS This coding challenge is to write a program that will show a user possible matches for a list of provided phone numbers.
 
 ## Installation
-
-Add this line to your application's Gemfile:
-
+Check out the repo and cd into 'mobile_fish' folder and To install this gem onto your local machine:
+run `bundle exec rake install`
+or
+To use it in a Gemfile, add
 ```ruby
 gem 'mobile_fish'
 ```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install mobile_fish
-
 ## Usage
 
-TODO: Write usage instructions here
+Once the gem is installed locally, you can use the executable `mobile-fish`
+Examples:
+  1) When phone_number files is given as arguments
+    mobile-fish file_1.txt file_2.txt
+    USE-RUBY
+    CALL-ME
+  2) When phone_numbers file is not given, it propts to enter the phone_number
+    mobile-fish
+    2255-63
+    CALL-ME
+
 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/mobile_fish. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
+To install this gem onto your local machine, run `bundle exec rake install`.
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
