@@ -1,7 +1,7 @@
 require "mobile_fish/encoders"
 
 module MobileFish
-  class PhoneNumberEncoder
+  class PhoneEncoderService
 
     DIGIT_ENCODINGS = {a: "2", b: "2", c: "2", d: "3", e: "3", f: "3", g: "4",
       h: "4", i: "4", j: "5", k: "5", l: "5", m: "6", n: "6", o: "6", p: "7",
