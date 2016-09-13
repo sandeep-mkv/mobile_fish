@@ -3,7 +3,9 @@ require "mobile_fish/phone_encoder_service"
 require "mobile_fish/application"
 
 SAMPLE_DICTIONARY_FILE = "#{Dir.pwd}/test/data/sample_dictionary.txt"
-PHONE_NUMBERS_FILE = "#{Dir.pwd}/test/data/phone_numbers.txt"
+PHONE_NUMBERS_FILE1 = "#{Dir.pwd}/test/data/phone_numbers_file1.txt"
+PHONE_NUMBERS_FILE2 = "#{Dir.pwd}/test/data/phone_numbers_file2.txt"
+NO_FILE = "invalid_file"
 
 class ApplicationTest < Minitest::Test
 
@@ -19,8 +21,8 @@ class ApplicationTest < Minitest::Test
   end
 
   def test_that_it_gives_correct_word_matches_to_phone_numbers_read_from_files
-    config_options = {f: [PHONE_NUMBERS_FILE]}
-    assert_output("RUBY\n") {
+    config_options = {f: [PHONE_NUMBERS_FILE1, PHONE_NUMBERS_FILE2]}
+    assert_output("RUBY\nUSE\n") {
       MobileFish::Application.new(config_options).start
     }
   end
@@ -56,5 +58,12 @@ class ApplicationTest < Minitest::Test
         MobileFish::Application.new(config_options).start
       }
     end
+  end
+
+  def test_that_it_displays_error_msg_if_given_file_does_not_exists
+    config_options = {f: [NO_FILE, PHONE_NUMBERS_FILE1]}
+    assert_output("No such file or directory @ rb_sysopen - invalid_file\nRUBY\n") {
+      MobileFish::Application.new(config_options).start
+    }
   end
 end

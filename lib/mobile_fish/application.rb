@@ -28,11 +28,17 @@ module MobileFish
     end
 
     def handle_input_from_files
-      @phone_numbers_files.each do |file|
-        File.open(file).readlines.each do |phone_number|
-          @encoder_service.encode(phone_number).each {|result| puts result}
-        end
+      @phone_numbers_files.each do |file_path|
+        read_and_process(file_path)
       end
+    end
+
+    def read_and_process file_path
+      File.open(file_path).readlines.each do |phone_number|
+        @encoder_service.encode(phone_number).each {|result| puts result}
+      end
+    rescue Exception => e
+      puts "#{e.message}"
     end
 
     def configure
