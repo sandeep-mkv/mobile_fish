@@ -1,5 +1,4 @@
 require 'test_helper'
-require "mobile_fish/phone_encoder_service"
 require "mobile_fish/application"
 
 SAMPLE_DICTIONARY_FILE = "#{Dir.pwd}/test/data/sample_dictionary.txt"

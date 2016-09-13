@@ -11,8 +11,7 @@ module MobileFish
     end
 
     def start
-      phone_dictionary = PhoneDictionary.instance
-      phone_dictionary.set_dictionary @dictionary_file
+      phone_dictionary = PhoneDictionary.new(@dictionary_file)
       @encoder_service = MobileFish::PhoneEncoderService.new(phone_dictionary)
       return handle_input_from_stdin if @phone_numbers_files.empty?
       handle_input_from_files

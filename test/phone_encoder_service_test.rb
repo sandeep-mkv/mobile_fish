@@ -5,8 +5,7 @@ require "mobile_fish/phone_dictionary"
 class PhoneEncoderServiceTest < Minitest::Test
 
   def setup
-    phone_dictionary = MobileFish::PhoneDictionary.instance
-    phone_dictionary.set_dictionary(DEFAULT_DICTIONARY_FILE)
+    phone_dictionary = MobileFish::PhoneDictionary.new(DEFAULT_DICTIONARY_FILE)
     @phone_number_matcher = MobileFish::PhoneEncoderService.new(phone_dictionary)
   end
 
