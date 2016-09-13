@@ -1,10 +1,13 @@
 require 'test_helper'
 require "mobile_fish/phone_number_encoder"
+require "mobile_fish/phone_dictionary"
 
 class PhoneNumberEncoderTest < Minitest::Test
 
   def setup
-    @phone_number_matcher = MobileFish::PhoneNumberEncoder.new(DEFAULT_DICTIONARY_FILE)
+    phone_dictionary = MobileFish::PhoneDictionary.instance
+    phone_dictionary.set_dictionary(DEFAULT_DICTIONARY_FILE)
+    @phone_number_matcher = MobileFish::PhoneNumberEncoder.new(phone_dictionary)
   end
 
   def test_that_it_cannot_be_initialized_without_a_dictionary_file

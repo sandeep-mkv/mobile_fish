@@ -1,4 +1,5 @@
 require "mobile_fish/phone_number_encoder"
+require "mobile_fish/phone_dictionary"
 
 module MobileFish
   class ApplicationService
@@ -10,6 +11,11 @@ module MobileFish
     end
 
     def start
+      phone_dictionary = PhoneDictionary.instance
+      phone_dictionary.set_dictionary @dictionary_file
+      @phone_number_encoder = MobileFish::PhoneNumberEncoder.new(
+          phone_dictionary
+        )
       return handle_input_from_stdin if @phone_numbers_files.empty?
       handle_input_from_files
     end
@@ -19,20 +25,14 @@ module MobileFish
     def handle_input_from_stdin
       phone_number = gets.chomp.gsub(/[^0-9]/, '')
       unless phone_number.empty?
-        phone_number_encoder = MobileFish::PhoneNumberEncoder.new(
-            @dictionary_file
-          )
-        phone_number_encoder.encode(phone_number).each {|result| puts result}
+        @phone_number_encoder.encode(phone_number).each {|result| puts result}
       end
     end
 
     def handle_input_from_files
       @phone_numbers_files.each do |file|
         File.open(file).readlines.each do |phone_number|
-          phone_number_encoder =  MobileFish::PhoneNumberEncoder.new(
-            @dictionary_file
-          )
-          phone_number_encoder.encode(phone_number).each {|result| puts result}
+          @phone_number_encoder.encode(phone_number).each {|result| puts result}
         end
       end
     end
