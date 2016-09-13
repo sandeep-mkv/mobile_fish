@@ -7,6 +7,7 @@ module MobileFish
 
     def get_matches phone_number
       phone_number = phone_number.gsub(/[^0-9]/i, '')
+      return [] if phone_number.empty?
       matched_list = find_word_matches(phone_number, matched_list=[])
       results = process_matched_results(matched_list)
       results.reject! { |words| words =~ /\d-\d/ }

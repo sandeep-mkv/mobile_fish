@@ -24,12 +24,23 @@ in the second case it will prompt for an input, Enter the phone number to get th
 Examples:
 
 1. When phone_number files is given as arguments
-    bundle exec exe/mobile_fish file_1.txt
+
+```ruby
+bundle exec exe/mobile_fish phone_numbers.txt
+```
+
     USE-RUBY
+
     CALL-ME
-2. When phone_numbers file is not given, it prompts. Enter a phone_number
-    bundle exec exe/mobile_fish mobile-fish
+
+2. When phone_numbers file is not given, it prompts then enter a phone_number
+
+```ruby
+bundle exec exe/mobile_fish
+```
+
     2255-63
+    
     CALL-ME
 
 ### To run the tests:  

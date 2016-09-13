@@ -28,7 +28,7 @@ class ApplicationTest < Minitest::Test
 
   def test_that_it_gives_correct_word_matches_to_phone_number_read_from_stdin
     MobileFish::Application.stub_any_instance(:gets, "7829") do
-      assert_output("RUBY\n") {
+      assert_output("Enter a phone number:\nRUBY\n") {
         MobileFish::Application.new().start
       }
     end
@@ -36,7 +36,7 @@ class ApplicationTest < Minitest::Test
 
   def test_that_it_does_not_return_any_result_if_number_from_stdin_is_invalid
     MobileFish::Application.stub_any_instance(:gets, "invalid_number") do
-      assert_output("") {
+      assert_output("Enter a phone number:\n") {
         MobileFish::Application.new().start
       }
     end
@@ -44,7 +44,7 @@ class ApplicationTest < Minitest::Test
 
   def test_that_it_does_not_return_any_result_if_number_from_stdin_has_no_matches
     MobileFish::Application.stub_any_instance(:gets, "9538719531") do
-      assert_output("") {
+      assert_output("Enter a phone number:\n") {
         MobileFish::Application.new().start
       }
     end
@@ -53,7 +53,7 @@ class ApplicationTest < Minitest::Test
   def test_that_it_gives_correct_results_when_configured_to_use_a_dictionary_provided_by_user
     config_options = {d: SAMPLE_DICTIONARY_FILE}
     MobileFish::Application.stub_any_instance(:gets, "767886732724") do
-      assert_output("SORT-TO-SEARCH\n") {
+      assert_output("Enter a phone number:\nSORT-TO-SEARCH\n") {
         MobileFish::Application.new(config_options).start
       }
     end

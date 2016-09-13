@@ -20,6 +20,7 @@ module MobileFish
     private
 
     def handle_input_from_stdin
+      puts "Enter a phone number:"
       phone_number = gets.chomp.gsub(/[^0-9]/, '')
       unless phone_number.empty?
         @encoder_service.encode(phone_number).each {|result| puts result}
