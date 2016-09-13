@@ -13,6 +13,9 @@ module MobileFish
       File.readlines(@dictionary_path).each do |word|
         yield(word)
       end
+    rescue Exception => e
+      puts "#{e.message}"
+      puts "Hence, using the default"
     end
 
     def build_number_to_words_map
