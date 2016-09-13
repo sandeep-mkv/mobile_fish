@@ -15,21 +15,26 @@ Check out the repo and cd into 'mobile_fish' folder and then run `bundle install
 ```ruby
 bundle exec exe/mobile_fish phone_numbers.txt
 ```
- OR to run without giving a file
 
  ```ruby
  bundle exec exe/mobile_fish
  ```
-this will prompt for an input, Enter the phone number and it will give the results.
+in the second case it will prompt for an input, Enter the phone number to get the results.
 
 Examples:
-  1) When phone_number files is given as arguments
+
+1. When phone_number files is given as arguments
     bundle exec exe/mobile_fish file_1.txt
     USE-RUBY
     CALL-ME
-  2) When phone_numbers file is not given, it prompts. Enter a phone_number
+2. When phone_numbers file is not given, it prompts. Enter a phone_number
     bundle exec exe/mobile_fish mobile-fish
     2255-63
     CALL-ME
 
-### To run the tests:  `rake test`
+### To run the tests:  
+```ruby
+rake test
+or
+bundle exec rake test
+```
